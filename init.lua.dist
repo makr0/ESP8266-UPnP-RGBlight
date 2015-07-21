@@ -1,0 +1,45 @@
+-- Compile server code and remove original .lua files.
+-- This only happens the first time afer the .lua files are uploaded.
+
+local compileAndRemoveIfNeeded = function(f)
+   if file.open(f) then
+      file.close()
+      print('Compiling:', f)
+      node.compile(f)
+      file.remove(f)
+      collectgarbage()
+   end
+end
+
+local serverFiles = {'httpserver.lua', 'httpserver-basicauth.lua', 'httpserver-conf.lua', 'httpserver-b64decode.lua', 'httpserver-request.lua', 'httpserver-static.lua', 'httpserver-header.lua', 'httpserver-error.lua', 'upnp.lua'}
+for i, f in ipairs(serverFiles) do compileAndRemoveIfNeeded(f) end
+
+compileAndRemoveIfNeeded = nil
+serverFiles = nil
+collectgarbage()
+
+-- Connect to the WiFi access point.
+-- Once the device is connected, start the HTTP server.
+
+NUM_LEDS=5
+function spinner(step,color)
+  red=string.char(255,0 , 0)
+  black=string.char(0, 0, 0)
+  ws2812.writergb(4, black:rep(step)..red..black:rep(NUM_LEDS-step-1))
+end
+
+wifi.setmode(wifi.STATION)
+wifi.sta.config("your-ssid", "your-wlan-password",0)
+wifi.sta.connect()
+step=0
+tmr.alarm(0, 100, 1, function()
+   if wifi.sta.getip()==nil then
+      spinner(step)
+      step=step+1
+      if step==NUM_LEDS then step=0 end
+   else
+      tmr.stop(0)
+      dofile("httpserver.lc")(80)
+      dofile("upnp.lc")
+   end
+end)

@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<root xmlns='urn:schemas-upnp-org:device-1-0'>
+<device>
+<deviceType>urn:schemas-upnp-org:device:DimmableLight:1</deviceType>
+<presentationURL>/leds.lua</presentationURL>
+<friendlyName>Fnordlicht</friendlyName>
+<manufacturer>unlimited surprise systems</manufacturer>
+<manufacturerURL>http://example.com/</manufacturerURL>
+<serialNumber>"10275488"</serialNumber>
+<UDN>uuid:49c893b4-2fe9-11e5-9751-0024e820e50e</UDN>
+</device></root>
