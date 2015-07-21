@@ -5,7 +5,7 @@
 <presentationURL>/leds.lua</presentationURL>
 <friendlyName>Fnordlicht</friendlyName>
 <manufacturer>unlimited surprise systems</manufacturer>
-<manufacturerURL>http://example.com/</manufacturerURL>
+<manufacturerURL>https://github.com/makr0/ESP8266-UPnP-RGBlight</manufacturerURL>
 <serialNumber>"10275488"</serialNumber>
 <UDN>uuid:49c893b4-2fe9-11e5-9751-0024e820e50e</UDN>
 </device></root>
